@@ -1,12 +1,16 @@
 {
   "name": "bindview-hashrouter",
   "version": "1.0.0",
-  "description": "`Switch` 是基于动态组件创建的，组件需要两个属性 `rank` 路由级别 `module` 组件，组件使用了函数插槽，函数接收一个参数的是当前路由级别的路由字符串，通过这个字符串配合 `swtich` 语句返回对应的 组件",
+  "description": "基于 bindview.js V2.1.0 的 hash 路由组件库",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/debfig/bindview-HashRouter.git"
+  },
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": ["bindview-hashrouter"],
+  "author": "canlie",
+  "license": "MIT"
 }
