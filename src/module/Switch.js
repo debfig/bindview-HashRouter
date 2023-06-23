@@ -4,7 +4,7 @@
  * @returns 
  */
 export default function (props) {
-  const { rank, module } = props
+  const { rank, module, defend } = props
   let { slot } = this
   return {
     name: 'Switch',
@@ -16,6 +16,7 @@ export default function (props) {
     },
     methods: {
       handleRouter(router) {
+        // 匹配路由拼接路由字符串
         router = router.split('?')
         switch (router[0]) {
           case "/":
@@ -40,24 +41,39 @@ export default function (props) {
             break;
         }
       },
-      onhashchange() {
-        let hash = window.location;
-        hash = hash.hash !== '' ? hash.hash : '/';
-        this.methods.handleRouter.call(this, hash);
-      }
+      getRouter(to) {
+        // 获取和设置路由
+        if (to) {
+          location.href = "#" + to
+          this.methods.handleRouter.call(this, "#" + to);
+        } else {
+          let hash = window.location;
+          hash = hash.hash !== '' ? hash.hash : '/';
+          this.methods.handleRouter.call(this, hash);
+        }
+      },
+      onhashchange(event) {
+        if (typeof defend === "function") {
+          let newGetRouter = this.methods.getRouter.bind(this)
+          let oldURL = event !== undefined ? new URL(event.oldURL) : "";
+          let newURL = event !== undefined ? new URL(event.newURL) : new URL(location.href);
+          oldURL = oldURL !== "" ? oldURL.hash === "" ? "/" : oldURL.hash.split('#')[1] : "";
+          newURL = newURL.hash === "" ? "/" : newURL.hash.split('#')[1]
+          defend(oldURL, newURL, newGetRouter)
+        } else if (defend === undefined) {
+          // 处理路由首位
+          this.methods.getRouter.call(this)
+        } else {
+          console.error("[hashRouter] defend 需要一个函数");
+        }
+      },
     },
     life: {
       createDom() {
         let _this = this;
 
-        let onload = function () {
-          let hash = window.location
-          hash = hash.hash !== '' ? hash.hash : '/'
-          _this.methods.handleRouter.call(_this, hash);
-        }
-
         // 创建组件时获取路由
-        onload()
+        this.methods.onhashchange.call(this)
 
         // 添加路由事件监听
         window.addEventListener('hashchange', _this.methods.onhashchange.bind(this))
