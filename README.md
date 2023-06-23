@@ -53,6 +53,68 @@ export default function () {
 }
 ```
 
+`Switch` 组件路由守卫, 组件上有一个 `defend` 属性它需要一个函数参数，函数会接到3个参数，为 `oldURL` `newURL` `next` 分别为 旧的路由，新的路由，和 `next` 用来对路由放行和定向重
+
+```jsx
+import requer from "./Requer"
+
+import Home from "./view/Home";
+import Login from "./view/Login";
+import I404 from "./Component/404"
+
+export default function () {
+
+  let { uuid } = this
+  let a = uuid(), b = uuid(), c = uuid(), d = uuid();
+
+  return {
+    name: 'App',
+    node(h) {
+      return (
+        <Switch
+          rank={1}
+          module={{ Home, Login, I404 }}
+          defend={h.defend} >{(router) => {
+            switch (router) {
+              case '/':
+                return <Home id={a} />
+              case '/Login':
+                return <Login id={b} />
+              default:
+                return <I404 id={d} />
+            }
+          }}</Switch>
+      )
+    },
+    methods: {
+      async defend(oldURL, newURL, next) {
+        if (!this.state) {
+          let token = localStorage.getItem('Token')
+          if (token) {
+            let res = await requer.get('/get/getState')
+            if (res.status === 200) {
+              this.__proto__.state = true
+              next()
+            } else {
+              next('/Login')
+            }
+          } else {
+            next('/Login')
+          }
+        } else {
+          next()
+        }
+      }
+    },
+    life: {
+      createDom() {
+        console.log(this);
+      }
+    }
+  }
+}
+```
+
 
 
 组件中还有一些方法，可以进行编程式路由
