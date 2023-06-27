@@ -8,7 +8,7 @@
 
 ### Switch 路由组件
 
-`Switch` 是基于动态组件创建的，组件需要两个属性 `rank` 路由级别 `module` 组件，组件使用了函数插槽，函数接收一个参数的是当前路由级别的路由字符串，通过这个字符串配合 `swtich` 语句返回对应的 组件 
+`Switch` 是基于动态组件创建的，组件必要两个属性 `rank` 路由级别 `module` 组件，组件使用了函数插槽，函数接收一个参数的是当前路由级别的路由字符串，通过这个字符串配合 `swtich` 语句返回对应的 `组件`, 次要的属性 `className` 用来自定义 `Switch` 组件的类名的
 
 ```jsx
 import Dome1 from "./Component/Dome1"
@@ -28,7 +28,7 @@ export default function () {
           <div><a href="#/Dome1">Dome1</a> | <a href="#/Dome2">Dome2</a></div>
           <hr />
               
-          <Switch rank={1} module={{ Dome1, Dome2, I404 }}>{(router) => {
+          <Switch rank={1} module={{ Dome1, Dome2, I404 }} className="My-Switch">{(router) => {
             switch (router) {
               case '/':
                 return <Dome1 id={a} />
