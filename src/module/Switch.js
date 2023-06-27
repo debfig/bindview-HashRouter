@@ -4,12 +4,12 @@
  * @returns 
  */
 export default function (props) {
-  const { rank, module, defend } = props
+  const { rank, module, defend, className } = props
   let { slot } = this
   return {
     name: 'Switch',
     node(h) {
-      return h('div', { class: 'Switch' }, [slot(this.router)])
+      return h('div', { class: className ? typeof className === 'string' ? className : "Switch" : "Switch" }, [slot(this.router)])
     },
     data: {
       router: '/'
