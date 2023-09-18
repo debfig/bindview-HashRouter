@@ -11,6 +11,7 @@
 `Switch` 是基于动态组件创建的，组件必要两个属性 `rank` 路由级别 `module` 组件，组件使用了函数插槽，函数接收一个参数的是当前路由级别的路由字符串，通过这个字符串配合 `swtich` 语句返回对应的 `组件`, 次要的属性 `className` 用来自定义 `Switch` 组件的类名的
 
 ```jsx
+import {createId} from "bindview"
 import Dome1 from "./Component/Dome1"
 import Dome2 from "./Component/Dome2"
 import I404 from "../Router/Component/404"
@@ -18,7 +19,7 @@ import I404 from "../Router/Component/404"
 export default function () {
 
   let { uuid } = this
-  let a = uuid(), b = uuid(), c = uuid()
+  const [ a, b, c ]=createId(3)
 
   return {
     name: 'App',
@@ -56,6 +57,7 @@ export default function () {
 `Switch` 组件路由守卫, 组件上有一个 `defend` 属性它需要一个函数参数，函数会接到3个参数，为 `oldURL` `newURL` `next` 分别为 旧的路由，新的路由，和 `next` 用来对路由放行和定向重
 
 ```jsx
+import {createId} from "bindview"
 import requer from "./Requer"
 
 import Home from "./view/Home";
@@ -65,7 +67,7 @@ import I404 from "./Component/404"
 export default function () {
 
   let { uuid } = this
-  let a = uuid(), b = uuid(), c = uuid(), d = uuid();
+  const [ a, b, c, d]=createId(4)
 
   return {
     name: 'App',
@@ -153,6 +155,7 @@ Url.utf8()
 `Link` 组件是配合 `Switch` 来使用的，组件会创建出一个 `a` 标签，组件上有三个属性， `to` 属性是要去的路由，`rank` 是路由级别跟 `Switch` 的路由级别一样， `className` a标签类名可以不添加，`activeClass` 激活时添加类名默认添加 `active` 
 
 ```jsx
+import {createId} from "bindview"
 import { Switch, Url, Link } from "./bindview-hashrouter";
 
 import Dome1 from "./Component/Dome1"
@@ -162,7 +165,7 @@ import I404 from "../Router/Component/404"
 export default function () {
 
   let { uuid } = this
-  let a = uuid(), b = uuid(), c = uuid()
+  const [ a, b, c ]=createId(3)
 
   return {
     name: 'App',
