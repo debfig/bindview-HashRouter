@@ -7,10 +7,10 @@ export default function (props) {
   return {
     name: 'Link',
     node(h) {
-      let { router } = this
+      const { data: $, methods: f } = this
       return h('a', {
         href: "#" + to,
-        class: h.className(to, router, className, activeClass)
+        class: f.className(to, $.router, className, activeClass)
       }, [slot()])
     },
     data: {

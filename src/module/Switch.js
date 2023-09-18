@@ -9,7 +9,9 @@ export default function (props) {
   return {
     name: 'Switch',
     node(h) {
-      return h('div', { class: className ? typeof className === 'string' ? className : "Switch" : "Switch" }, [slot(this.router)])
+      const { data: $ } = this
+
+      return h('div', { class: className ? typeof className === 'string' ? className : "Switch" : "Switch" }, [slot($.router)])
     },
     data: {
       router: '/'
