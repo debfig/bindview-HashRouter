@@ -1,6 +1,6 @@
 {
   "name": "bindview-hashrouter",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "基于 bindview.js V2.1.0 的 hash 路由组件库",
   "repository": {
     "type": "git",
